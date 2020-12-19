@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books and Authors</title>
+  {% load static %}
+  <!-- all css here -->
+  <!-- bootstrap v3.3.6 css -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body>
+  <h1>Books and Authors</h1>
+
+  <form action="/add_book" method="post">
+    {% csrf_token %}
+    <div>
+      <label for="">Title</label>
+      <input type="text" name="title">
+
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    </div>
+    <button>Add</button>
+  </form>
+
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr>
+        <td>{{book.id}}</td>
+        <td>{{book.title}}</td>
+        <td>
+          <a href="/books/{{ book.id }}">View</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>
